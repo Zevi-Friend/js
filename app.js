@@ -8,8 +8,8 @@ container.addEventListener("click", ()=>{
 })
 document.body.appendChild(container);
 
-let pixles = 20;
-let boxSize = 400 / pixles;
+let pixels = 20;
+let boxSize = 400 / pixels;
 
 function randomColor() {
     if(ifOn == true) {
@@ -28,11 +28,11 @@ function randomColor() {
 function makeGrid() {
     container.innerHTML = "";
 
-    for (let rows = 0; rows < pixles; rows += 1) {
+    for (let rows = 0; rows < pixels; rows += 1) {
         let row = document.createElement("div");
         row.setAttribute("style", "display: flex; width: fit-content");
 
-        for (let columns = 0; columns < pixles; columns += 1) {
+        for (let columns = 0; columns < pixels; columns += 1) {
             let box = document.createElement("div");
             box.setAttribute("style", `width: ${boxSize}px; height: ${boxSize}px; flex-shrink: 0`);
             box.addEventListener("mouseover", randomColor);
@@ -46,23 +46,23 @@ makeGrid();
 
 let button = document.createElement("button");
 button.setAttribute("style", "border: 3px solid rgb(75, 75, 255); background-color: rgb(42, 198, 222); font-size: 25px; border-radius: 7px; margin-top: 15px");
-button.textContent= "Set amount of pixles";
+button.textContent= "Set amount of pixels";
 button.addEventListener("click", getboxSize);
 document.body.appendChild(button);
 
 function getboxSize() {
-    pixleString = prompt("Enter amount of pixles");
+    pixelString = prompt("Enter amount of pixels");
+    pixels = Number(pixelString);
 
-    if (pixleString != null) {
-        pixles = Number(pixleString);
-        boxSize = 400 / pixles;
-
-        while (pixleString > 185) {
-            pixleString = prompt("Enter a number for the amount of pixles");
-        }
-
+    while (pixelString > 185 || isNaN(pixelString)) {
+        pixelString = prompt("Enter a number for the amount of pixels. (Or click \"cancel\")");
+    }
+    if (pixelString != null && pixelString != "") {
+        pixels = Number(pixelString);
+        boxSize = 400 / pixels
         makeGrid();
     }
+    
 }
 
 button = document.createElement("button");
